@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml version="1.0">
+    <feed lang="en" version="25">
+        <title>Minimal Feed</title>
+        <pubDate>2025-05-22T00:00:00Z</pubDate>
+        <copyright>Copyright 2025</copyright>
+        <link rel="self" type="text/html" href="http://example.com"/>
+        <item>
+            <guid>http://example.com/item1</guid>
+            <title>Item 1</title>
+            <category term="test"/>
+            <published>2025-05-22T00:00:00Z</published>
+            <content type="text" src="http://example.com/content"/>
+            <author>
+                <name>John Doe</name>
+            </author>
+        </item>
+    </feed>
+</xml>

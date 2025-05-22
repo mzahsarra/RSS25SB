@@ -1,0 +1,191 @@
+{
+  "info": {
+    "name": "rss25SB_mzahsarra",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Home Page",
+      "description": "Fetches the home page of the rss25SB project, displaying project details in HTML.",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/",
+          "host": ["{{server}}"],
+          "path": [""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Help Page",
+      "description": "Fetches the help page listing all available operations in HTML.",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/help",
+          "host": ["{{server}}"],
+          "path": ["help"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Articles Summary (XML)",
+      "description": "Retrieves a summary list of articles in XML format, including id, date, and guid.",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/xml"}
+        ],
+        "url": {
+          "raw": "{{server}}/rss25SB/resume/xml",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "resume", "xml"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Articles Summary (HTML)",
+      "description": "Retrieves a summary list of articles in HTML format, presented in a table.",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "text/html"}
+        ],
+        "url": {
+          "raw": "{{server}}/rss25SB/resume/html",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "resume", "html"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Article Detail (XML) - Valid ID",
+      "description": "Fetches the full details of an article by ID in XML format. Assumes ID=1 exists.",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/xml"}
+        ],
+        "url": {
+          "raw": "{{server}}/rss25SB/xml/1",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "xml", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Article Detail (XML) - Invalid ID",
+      "description": "Tests the error response for an invalid article ID in XML format.",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "application/xml"}
+        ],
+        "url": {
+          "raw": "{{server}}/rss25SB/xml/999",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "xml", "999"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Article Detail (HTML) - Valid ID",
+      "description": "Fetches the full details of an article by ID in HTML format. Assumes ID=1 exists.",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "text/html"}
+        ],
+        "url": {
+          "raw": "{{server}}/rss25SB/html/1",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "html", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Article Detail (HTML) - Invalid ID",
+      "description": "Tests the error response for an invalid article ID in HTML format.",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Accept", "value": "text/html"}
+        ],
+        "url": {
+          "raw": "{{server}}/rss25SB/html/999",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "html", "999"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert Article",
+      "description": "Inserts a new article into the database using a minimal XML payload.",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/xml"},
+          {"key": "Accept", "value": "application/xml"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xml version=\"1.0\">\n    <feed lang=\"en\" version=\"25\">\n        <title>Minimal Feed</title>\n        <pubDate>2025-05-22T00:00:00Z</pubDate>\n        <copyright>Copyright 2025</copyright>\n        <link rel=\"self\" type=\"text/html\" href=\"http://example.com\"/>\n        <item>\n            <guid>http://example.com/item1</guid>\n            <title>Item 1</title>\n            <category term=\"test\"/>\n            <published>2025-05-22T00:00:00Z</published>\n            <content type=\"text\" src=\"http://example.com/content\"/>\n            <author>\n                <name>John Doe</name>\n            </author>\n        </item>\n    </feed>\n</xml>"
+        },
+        "url": {
+          "raw": "{{server}}/rss25SB/insert",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "insert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Article - Valid ID",
+      "description": "Deletes an article by ID. Assumes ID=1 exists.",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Accept", "value": "application/xml"}
+        ],
+        "url": {
+          "raw": "{{server}}/rss25SB/delete/1",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "delete", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Article - Invalid ID",
+      "description": "Tests the error response for deleting an invalid article ID.",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Accept", "value": "application/xml"}
+        ],
+        "url": {
+          "raw": "{{server}}/rss25SB/delete/999",
+          "host": ["{{server}}"],
+          "path": ["rss25SB", "delete", "999"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "server",
+      "value": "https://rss25sb-mzahsarra.cleverapps.io"
+    }
+  ]
+}

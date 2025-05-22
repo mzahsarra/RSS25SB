@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>rss25SB Help</title>
+</head>
+<body>
+<h1>Help</h1>
+<table border="1">
+    <tr>
+        <th>URL</th>
+        <th>Method</th>
+        <th>Operation</th>
+        <th>Format</th>
+    </tr>
+    <tr th:each="op : ${operations}">
+        <td th:text="${op[0]}"></td>
+        <td th:text="${op[1]}"></td>
+        <td th:text="${op[2]}"></td>
+        <td th:text="${op[3]}"></td>
+    </tr>
+</table>
+</body>
+</html>

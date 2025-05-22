@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <!-- Root element: xml with feed as child -->
+    <xs:element name="xml">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="feed" type="feedType" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="version" type="xs:string" fixed="1.0"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- feedType definition -->
+    <xs:complexType name="feedType">
+        <xs:sequence>
+            <xs:element name="title" type="text128Type" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="pubDate" type="rfc3339DateType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="copyright" type="text128Type" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="link" type="linkType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="item" type="itemType" minOccurs="1" maxOccurs="10"/>
+        </xs:sequence>
+        <xs:attribute name="lang" type="languageType" use="required"/>
+        <xs:attribute name="version" type="xs:string" fixed="25" use="required"/>
+    </xs:complexType>
+
+    <!-- linkType definition -->
+    <xs:complexType name="linkType">
+        <xs:simpleContent>
+            <xs:extension base="urlType">
+                <xs:attribute name="rel" type="linkRelType" use="required"/>
+                <xs:attribute name="type" type="mimeType" use="required"/>
+                <xs:attribute name="href" type="urlType" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="linkRelType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="self"/>
+            <xs:enumeration value="alternate"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- itemType definition -->
+    <xs:complexType name="itemType">
+        <xs:sequence>
+            <xs:element name="guid" type="urlType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="title" type="text128Type" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="category" type="categoryType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:choice>
+                <xs:element name="published" type="rfc3339DateType"/>
+                <xs:element name="updated" type="rfc3339DateType"/>
+            </xs:choice>
+            <xs:element name="image" type="imageType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="content" type="contentType" minOccurs="1" maxOccurs="1"/>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="author" type="personType"/>
+                <xs:element name="contributor" type="personType"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- categoryType definition -->
+    <xs:complexType name="categoryType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="term" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- imageType definition -->
+    <xs:complexType name="imageType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="imageTypeEnum" use="required"/>
+                <xs:attribute name="href" type="urlType" use="required"/>
+                <xs:attribute name="alt" type="xs:string" use="required"/>
+                <xs:attribute name="length" type="xs:int" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="imageTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GIF"/>
+            <xs:enumeration value="JPEG"/>
+            <xs:enumeration value="JPG"/>
+            <xs:enumeration value="BMP"/>
+            <xs:enumeration value="PNG"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- contentType definition -->
+    <xs:complexType name="contentType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="contentTypeEnum" use="required"/>
+                <xs:attribute name="src" type="urlType" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="contentTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="text"/>
+            <xs:enumeration value="html"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- personType definition -->
+    <xs:complexType name="personType">
+        <xs:sequence>
+            <xs:element name="name" type="text64Type" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="email" type="emailType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="uri" type="urlType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Custom Types -->
+    <xs:simpleType name="languageType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z]{2,3}(-[A-Z]{2}|[0-9]{3})?"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="rfc3339DateType">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+    <xs:simpleType name="urlType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;()*\[\]*]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="emailType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;()*\[\]*]+@[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;()*\[\]*]+\.[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;()*\[\]*]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="mimeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9]+/[a-zA-Z0-9+\-\.]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="text128Type">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="128"/>
+            <xs:pattern value="[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;()*\[\]*\s/]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="text64Type">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+            <xs:pattern value="[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;()*\[\]*\s/]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
