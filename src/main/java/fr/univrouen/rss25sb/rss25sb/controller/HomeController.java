@@ -10,8 +10,8 @@ public class HomeController {
     public String home(Model model) {
         model.addAttribute("projectName", "rss25SB");
         model.addAttribute("version", "1.0.0");
-        model.addAttribute("developer", "John Doe");
-        model.addAttribute("universityLogo", "https://www.univ-rouen.fr/logo.png");
+        model.addAttribute("developer", "Mzah Sarra");
+        model.addAttribute("universityLogo", "resources/Université_de_Rouen.png");
         return "home";
     }
 }

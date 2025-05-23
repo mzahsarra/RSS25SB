@@ -15,13 +15,12 @@
             <image type="PNG" href="http://example.com/image.png" alt="Sample Image" length="1024"/>
             <content type="html" src="http://example.com/content.html">Sample content</content>
             <author>
-                <name>John Doe</name>
-                <email>johndoe@example.com</email>
-                <uri>http://example.com/johndoe</uri>
+                <name>Mzah Sarra</name>
+                <email>mzahsarra@gmail.com</email>
             </author>
             <contributor>
-                <name>Jane Doe</name>
-                <email>janedoe@example.com</email>
+                <name>Mzah Sarra</name>
+                <email>mzahsarra@gmail.com</email>
             </contributor>
         </item>
         <item>
@@ -30,7 +29,7 @@
             <updated>2025-05-23T00:00:00Z</updated>
             <content type="text" src="http://example.com/content2">Text content</content>
             <author>
-                <name>Bob Smith</name>
+                <name>authoritem</name>
             </author>
         </item>
     </feed>

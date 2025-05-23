@@ -7,6 +7,7 @@
 <h1>Project: <span th:text="${projectName}"></span></h1>
 <p>Version: <span th:text="${version}"></span></p>
 <p>Developer: <span th:text="${developer}"></span></p>
-<img th:src="${universityLogo}" alt="University Logo"/>
-</body>
+<img th:src="@{resources/univ-rouen-logo.png}" alt="Université de Rouen Logo"/></body>
+<p><a th:href="@{/rss25SB/resume/xml}">Liste des Articles (XML)</a></p>
+<p><a th:href="@{/rss25SB/resume/html}">Liste des Articles (HTML)</a></p>
 </html>
