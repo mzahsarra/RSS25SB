@@ -1,9 +1,11 @@
 package fr.univrouen.rss25sb.rss25sb.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Image {
+    @Column(insertable=false, updatable=false)
     private String type;
     private String href;
     private String alt;

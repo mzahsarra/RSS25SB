@@ -1,5 +1,6 @@
 package fr.univrouen.rss25sb.rss25sb.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
